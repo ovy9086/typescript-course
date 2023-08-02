@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "tsc": "tsc",
     "start": "ts-node index.ts"
   },
   "devDependencies": {
