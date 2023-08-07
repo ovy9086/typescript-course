@@ -3,4 +3,3 @@ node_modules
 *.local
 .idea
 .DS_Store
-.env

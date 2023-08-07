@@ -1,0 +1,82 @@
+type Product {
+    id: ID!
+    name: String!
+    description: String!
+    price: Float!
+    category: String!
+    inventory: Int!
+}
+
+type User {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    address: String!
+    orders: [Order!]!
+}
+
+type Order {
+    id: ID!
+    user: User!
+    products: [Product!]!
+    totalAmount: Float!
+    status: OrderStatus!
+    createdAt: String!
+}
+
+enum OrderStatus {
+    PLACED
+    SHIPPED
+    DELIVERED
+    CANCELLED
+}
+
+type Query {
+    # Get a single product by its ID
+    getProduct(id: ID!): Product
+
+    # Get a list of all products
+    getAllProducts: [Product!]!
+
+    # Get a single user by their ID
+    getUser(id: ID!): User
+
+    # Get a list of all users
+    getAllUsers: [User!]!
+
+    # Get a single order by its ID
+    getOrder(id: ID!): Order
+
+    # Get a list of all orders
+    getAllOrders: [Order!]!
+}
+
+type Mutation {
+    # Add a new product to the store
+    addProduct(name: String!, description: String!, price: Float!, category: String!, inventory: Int!): Product
+
+    # Update product details by its ID
+    updateProduct(id: ID!, name: String, description: String, price: Float, category: String, inventory: Int): Product
+
+    # Remove a product from the store by its ID
+    deleteProduct(id: ID!): ID
+
+    # Create a new user account
+    registerUser(firstName: String!, lastName: String!, email: String!, address: String!): User
+
+    # Update user details by their ID
+    updateUser(id: ID!, firstName: String, lastName: String, email: String, address: String): User
+
+    # Remove a user account by their ID
+    deleteUser(id: ID!): ID
+
+    # Create a new order
+    createOrder(userId: ID!, productIds: [ID!]!): Order
+
+    # Update the status of an order by its ID
+    updateOrderStatus(id: ID!, status: OrderStatus!): Order
+
+    # Cancel an order by its ID
+    cancelOrder(id: ID!): Order
+}
